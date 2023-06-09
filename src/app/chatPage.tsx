@@ -3,8 +3,7 @@
 import Composer from "@/components/composer";
 import Messages from "@/components/messages";
 import { Message } from "@/types/types";
-import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function ChatPage() {
   const testMessages: Message[] = [
@@ -18,6 +17,17 @@ export default function ChatPage() {
   ];
 
   const [messages, setMessages] = useState(testMessages);
+
+  useEffect(() => {
+    async function fetchMessages() {
+      let res = await fetch("/api");
+      const data = await res.json();
+      if (data && data.length) {
+        setMessages(data);
+      }
+    }
+    fetchMessages();
+  }, []);
   const addNewMessage = (newMessage: Message) => {
     setMessages((existingMessages) => [...existingMessages, newMessage]);
   };

@@ -9,13 +9,15 @@ export default function Composer(props: {
   const [username, setUsername] = useState("");
   const [message, setMessage] = useState("");
 
-  const handleClick = () => {
-    props.sendFunction({
+  const handleClick = async () => {
+    const newMessage = {
       username,
       text: message,
       timestamp: new Date(),
-    });
+    };
+    props.sendFunction(newMessage);
     setMessage("");
+    await fetch("/api", { method: "POST", body: JSON.stringify(newMessage) });
   };
   return (
     <div className="fixed inset-x-5 bottom-5 bg-clip-padding bg-indigo">
