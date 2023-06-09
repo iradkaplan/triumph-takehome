@@ -8,7 +8,7 @@ export default function Messages(props: { content: Message[] }) {
 
   useEffect(() => {
     bottomDiv.current?.scrollIntoView({ behavior: "smooth" });
-  });
+  }, [props]);
   return (
     <div className="flex flex-col flex-nowrap">
       {props.content.map((message, index) => {
