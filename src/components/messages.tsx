@@ -4,10 +4,10 @@ import { Message } from "@/types/types";
 import { useEffect, useRef } from "react";
 
 export default function Messages(props: { content: Message[] }) {
-  const divRef = useRef<null | HTMLDivElement>(null);
+  const bottomDiv = useRef<null | HTMLDivElement>(null);
 
   useEffect(() => {
-    divRef.current?.scrollIntoView({ behavior: "smooth" } /*add dependency!*/);
+    bottomDiv.current?.scrollIntoView({ behavior: "smooth" });
   });
   return (
     <div className="flex flex-col flex-nowrap">
@@ -26,7 +26,7 @@ export default function Messages(props: { content: Message[] }) {
         );
       })}
 
-      <div ref={divRef} />
+      <div ref={bottomDiv} />
     </div>
   );
 }
